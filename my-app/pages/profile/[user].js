@@ -1,9 +1,20 @@
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "../../styles/Home.module.css";
+import { useSession } from "next-auth/client";
 
 function Profile({ user }) {
-  const router = useRouter();
+  const Router = useRouter();
+  const [session, loading] = useSession();
+
+  useEffect(() => {
+    if (!loading) {
+      if (!session) {
+        window.location.href = "/authorize/signin";
+      }
+    }
+  }, [loading]);
 
   return (
     <div className={styles.container}>
