@@ -16,8 +16,15 @@ import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    username: "",
+    password: "",
+    confirm_password: "",
+  });
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -26,27 +33,33 @@ export default function Signup() {
   async function Signup(event) {
     setLoading(true);
     event.preventDefault();
-    const result = await axios.post("/api/user/signup", { username: "test" });
-    if (result) {
-      setLoading(false);
-    }
-  }
 
-  function ShowPassword() {
-    alert("hello");
+    try {
+      const new_user = await axios.post("/api/user/signup", user);
+
+      if (new_user.status === 200) {
+        setLoading(false);
+        router.push("/authorize/signin");
+      }
+    } catch (error) {}
   }
 
   return (
     <div className={styles.container}>
       <style jsx global>{`
         body {
-          background-image: url("https://lh3.googleusercontent.com/proxy/l8N2lCAlfXVAEyc4H5B6WT1VWRshGTSDV3QEcBtv6AOeXwhBxDcqbIgJQfkCzB0tH0ZwGo-h3x2Pda9JQyhjFUV2L4QL5PNHRY2U3Olv20KttrPw6vjeCAzZUFXRcW_BArwkVA") !important;
-          background-size: cover;
+          background: rgb(22, 0, 36);
+          background: linear-gradient(
+            90deg,
+            rgba(22, 0, 36, 1) 0%,
+            rgba(88, 9, 121, 1) 43%,
+            rgba(200, 154, 255, 1) 100%
+          );
         }
       `}</style>
 
       <Head>
-        <title>WUFPH.chat | Signup</title>
+        <title>WUFPH.chat | Sign up</title>
       </Head>
       <Grid>
         <Grid.Row>
@@ -62,14 +75,21 @@ export default function Signup() {
           </Grid.Column>
           <Grid.Column width={8}>
             <div className={styles.signupDiv}>
-              <Segment className={styles.signupSegment}>
-                <Form>
+              <Segment className={styles.purpleAuthentication}>
+                <Form onSubmit={Signup}>
                   <Grid>
                     <Grid.Row className={styles.signupGrid}>
                       <Grid.Column width={16}>
                         <Form.Field>
                           <label style={{ color: "white" }}>First Name</label>
-                          <input placeholder="First Name" />
+                          <input
+                            placeholder="First Name"
+                            name="first_name"
+                            onChange={({ target }) => {
+                              setUser({ ...user, first_name: target.value });
+                            }}
+                            value={user.first_name}
+                          />
                         </Form.Field>
                       </Grid.Column>
                     </Grid.Row>
@@ -78,7 +98,14 @@ export default function Signup() {
                       <Grid.Column width={16}>
                         <Form.Field>
                           <label style={{ color: "white" }}>Last Name</label>
-                          <input placeholder="Last Name" />
+                          <input
+                            placeholder="Last Name"
+                            name="last_name"
+                            onChange={({ target }) => {
+                              setUser({ ...user, last_name: target.value });
+                            }}
+                            value={user.last_name}
+                          />
                         </Form.Field>
                       </Grid.Column>
                     </Grid.Row>
@@ -87,7 +114,15 @@ export default function Signup() {
                       <Grid.Column width={16}>
                         <Form.Field>
                           <label style={{ color: "white" }}>Email</label>
-                          <input placeholder="your@email.com" type="email" />
+                          <input
+                            placeholder="your@email.com"
+                            type="email"
+                            name="email"
+                            onChange={({ target }) => {
+                              setUser({ ...user, email: target.value });
+                            }}
+                            value={user.email}
+                          />
                         </Form.Field>
                       </Grid.Column>
                     </Grid.Row>
@@ -96,7 +131,15 @@ export default function Signup() {
                       <Grid.Column width={16}>
                         <Form.Field>
                           <label style={{ color: "white" }}>Phone Number</label>
-                          <input placeholder="xxx-xxx-xxxx" type="tel" />
+                          <input
+                            placeholder="xxx-xxx-xxxx"
+                            type="tel"
+                            name="phone_number"
+                            onChange={({ target }) => {
+                              setUser({ ...user, phone_number: target.value });
+                            }}
+                            value={user.phone_number}
+                          />
                         </Form.Field>
                       </Grid.Column>
                     </Grid.Row>
@@ -105,7 +148,14 @@ export default function Signup() {
                       <Grid.Column width={16}>
                         <Form.Field>
                           <label style={{ color: "white" }}>Username</label>
-                          <input placeholder="Create a username" />
+                          <input
+                            placeholder="Create a username"
+                            name="username"
+                            onChange={({ target }) => {
+                              setUser({ ...user, username: target.value });
+                            }}
+                            value={user.username}
+                          />
                         </Form.Field>
                       </Grid.Column>
                     </Grid.Row>
@@ -119,6 +169,11 @@ export default function Signup() {
                               name: "lock",
                             }}
                             type="password"
+                            name="password"
+                            onChange={({ target }) => {
+                              setUser({ ...user, password: target.value });
+                            }}
+                            value={user.password}
                           />
                         </Form.Field>
                       </Grid.Column>
@@ -135,6 +190,14 @@ export default function Signup() {
                               name: "lock",
                             }}
                             type="password"
+                            name="confirm_password"
+                            onChange={({ target }) => {
+                              setUser({
+                                ...user,
+                                confirm_password: target.value,
+                              });
+                            }}
+                            value={user.confirm_password}
                           />
                         </Form.Field>
                       </Grid.Column>
@@ -144,12 +207,12 @@ export default function Signup() {
                       <Grid.Column>
                         <Button
                           fluid
-                          color="purple"
-                          onClick={Signup}
+                          content="Sign up"
+                          color="pink"
                           loading={loading}
-                        >
-                          Signup
-                        </Button>
+                          size="huge"
+                          icon="paw"
+                        />
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
