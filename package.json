@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.4",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "mongodb": "^3.6.4",
