@@ -4,7 +4,8 @@
 }
 
 .loginDiv {
-  margin: 20% 0;
+  margin: 25% auto;
+  width: 60%;
 }
 
 .signupDiv {
@@ -13,9 +14,9 @@
   position: relative;
 }
 
-.signupSegment {
+.purpleAuthentication {
   border: 1px purple solid !important;
-  background-color: #000000dc !important;
+  background-color: #000000ea !important;
 }
 
 .signupGrid {
@@ -24,4 +25,8 @@
 
 .signupLogo {
   margin-top: 10%;
+}
+
+.whiteText {
+  color: white !important;
 }
