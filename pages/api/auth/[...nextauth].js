@@ -53,7 +53,7 @@ export default NextAuth({
           if (error) {
             //console.log(error.response);
             return Promise.reject(
-              "/authorize/signin?error=Invalid username or password"
+              "/authorize/login?error=Invalid username or password"
             );
           }
         }
@@ -61,9 +61,9 @@ export default NextAuth({
     }),
   ],
   pages: {
-    signIn: "/authorize/signin",
+    signIn: "/authorize/login",
     signOut: "/auth/signout",
-    error: "/authorize/signin", // Error code passed in query string as ?error=
+    error: "/authorize/login", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // (used for check email message)
     newUser: null, // If set, new users will be directed here on first sign in
   },
