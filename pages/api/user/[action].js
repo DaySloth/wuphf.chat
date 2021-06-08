@@ -28,7 +28,7 @@ export default async (req, res) => {
         const new_user = await Users.insertOne(user);
         if (new_user.insertedCount === 1) {
           //success
-          //SendEmail(user.email, "Testy Email", "Haha this worked");
+          SendEmail("allisterrampenthal@gmail.com", "Testy Email", "Haha this worked");
           res.status(200);
           res.end();
         }
