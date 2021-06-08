@@ -39,7 +39,7 @@ export default function Signup() {
 
       if (new_user.status === 200) {
         setLoading(false);
-        router.push("/authorize/signin");
+        router.push("/authorize/login");
       }
     } catch (error) {}
   }
