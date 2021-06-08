@@ -5,10 +5,10 @@ export async function SendEmail(recipient_email, subject, text) {
   try {
     const result = await sgMail.send({
       to: recipient_email,
-      from: "arampenthal@outlook.com",
+      from: process.env.SENDGRID_SENDER,
       subject: subject,
       text: text,
     });
-    console.log(`Successfully send email to: ${recipient_email}`);
+    console.log(`Successfully sent email to: ${recipient_email}`);
   } catch (error) {}
 }
