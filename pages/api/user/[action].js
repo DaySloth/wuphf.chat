@@ -1,6 +1,6 @@
-import { connectToDatabase } from "../../../util/mongodb";
+import { connectToDatabase } from "util/mongodb";
 import bcrypt from "bcrypt";
-import { SendEmail, SendSMS } from "../../../util/sender";
+import { SendEmail, SendSMS } from "util/sender";
 
 export default async (req, res) => {
   // pulls out the action from the query
