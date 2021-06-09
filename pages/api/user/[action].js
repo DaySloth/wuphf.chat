@@ -33,7 +33,7 @@ export default async (req, res) => {
           //   "Testy Email",
           //   "Haha this worked"
           // );
-          //SendSMS(`+1${user.phone_number}`);
+          SendSMS(`+1${user.phone_number}`);
           res.status(200);
           res.end();
         }
