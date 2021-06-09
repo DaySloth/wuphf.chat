@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../../../util/mongodb";
 import bcrypt from "bcrypt";
-import { SendEmail } from "../../../util/sender";
+import { SendEmail, SendSMS } from "../../../util/sender";
 
 export default async (req, res) => {
   // pulls out the action from the query
@@ -28,7 +28,12 @@ export default async (req, res) => {
         const new_user = await Users.insertOne(user);
         if (new_user.insertedCount === 1) {
           //success
-          SendEmail("allisterrampenthal@gmail.com", "Testy Email", "Haha this worked");
+          // SendEmail(
+          //   "allisterrampenthal@gmail.com",
+          //   "Testy Email",
+          //   "Haha this worked"
+          // );
+          //SendSMS(`+1${user.phone_number}`);
           res.status(200);
           res.end();
         }
