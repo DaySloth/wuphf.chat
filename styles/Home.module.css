@@ -27,6 +27,6 @@
   margin-top: 10%;
 }
 
-.whiteText {
-  color: white !important;
+.maxWidth {
+  width: 100% !important;
 }
