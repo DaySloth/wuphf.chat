@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { connectToDatabase } from "../../../util/mongodb";
+import { connectToDatabase } from "util/mongodb";
 import bcrypt from "bcrypt";
 
 async function login(user) {
@@ -48,12 +48,16 @@ export default NextAuth({
           if (user) {
             // Any object returned will be saved in `user` property of the JWT
             return Promise.resolve(user);
+          } else {
+            return Promise.reject(
+              `/authorize/login?user=${credentials.username}&error=Invalid username or password`
+            );
           }
         } catch (error) {
           if (error) {
             //console.log(error.response);
             return Promise.reject(
-              "/authorize/login?error=Invalid username or password"
+              `/authorize/login?user=${credentials.username}&error=Invalid username or password`
             );
           }
         }
