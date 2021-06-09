@@ -11,8 +11,7 @@ import {
   Input,
   Icon,
 } from "semantic-ui-react";
-import styles from "../../styles/Home.module.css";
-import { signIn } from "next-auth/client";
+import styles from "styles/Home.module.css";
 import { useRouter } from "next/router";
 
 export default function Signup() {
