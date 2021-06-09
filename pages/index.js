@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import styles from "../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 import { useSession, signOut } from "next-auth/client";
 
 export default function Home() {
-  const Router = useRouter();
+  const router = useRouter();
   const [session, loading] = useSession();
   useEffect(() => {
     if (!loading) {
@@ -28,7 +28,9 @@ export default function Home() {
           </Head>
 
           <main className={styles.main}>
-            <h1 className={styles.title}>Welcome to Home.</h1>
+            <h1 className={styles.title}>
+              Welcome to {session.user.first_name}'s Profile.
+            </h1>
             <ul>
               <li>
                 <a href="/login">Go To Login</a>
