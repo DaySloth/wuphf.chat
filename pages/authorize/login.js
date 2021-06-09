@@ -1,21 +1,46 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
-import styles from "../../styles/Home.module.css";
+import {
+  Button,
+  Divider,
+  Form,
+  Grid,
+  Segment,
+  Message,
+} from "semantic-ui-react";
+import styles from "styles/Home.module.css";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 
-export default function SignIn({ providers }) {
+export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [messageVisible, setMessageVisible] = useState(false);
 
   const router = useRouter();
-  const { error } = router.query;
+  const { error, user } = router.query;
+
+  useEffect(() => {
+    if (error) {
+      setMessageVisible(true);
+    } else {
+      setMessageVisible(false);
+    }
+
+    if (user) {
+      setUsername(user);
+    }
+  }, [error, user]);
 
   async function Login(event) {
     event.preventDefault();
-    signIn("credentials", { username, password });
+    setLoading(true);
+    signIn("credentials", {
+      username,
+      password,
+      callbackUrl: "http://localhost:3000",
+    });
   }
 
   return (
@@ -40,7 +65,7 @@ export default function SignIn({ providers }) {
         <Segment placeholder className={styles.purpleAuthentication}>
           <Grid columns={2} relaxed="very" stackable>
             <Grid.Column>
-              <Form onSubmit={Login} inverted>
+              <Form onSubmit={Login} inverted className={styles.maxWidth}>
                 <Form.Input
                   icon="user"
                   iconPosition="left"
@@ -50,7 +75,6 @@ export default function SignIn({ providers }) {
                     setUsername(target.value);
                   }}
                   value={username}
-                  className={styles.whiteText}
                 />
                 <Form.Input
                   icon="lock"
@@ -61,7 +85,6 @@ export default function SignIn({ providers }) {
                     setPassword(target.value);
                   }}
                   value={password}
-                  className={styles.whiteText}
                 />
 
                 <Button
@@ -91,6 +114,14 @@ export default function SignIn({ providers }) {
             Or
           </Divider>
         </Segment>
+
+        {messageVisible && (
+          <Message
+            onDismiss={() => setMessageVisible(false)}
+            header="Invalid username or password combo"
+            color="red"
+          />
+        )}
       </div>
     </div>
   );
