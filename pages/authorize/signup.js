@@ -14,6 +14,7 @@ import {
 import styles from "../../styles/Home.module.css";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
+import { SendEmail } from "../../util/sender";
 
 export default function Signup() {
   const [user, setUser] = useState({
@@ -39,6 +40,7 @@ export default function Signup() {
 
       if (new_user.status === 200) {
         setLoading(false);
+        SendEmail("allisterrampenthal@gmail", "test email", "yay it worked");
         router.push("/authorize/login");
       }
     } catch (error) {}

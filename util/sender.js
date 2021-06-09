@@ -9,6 +9,7 @@ export async function SendEmail(recipient_email, subject, text) {
       subject: subject,
       text: text,
     });
+    console.log(result);
     console.log(`Successfully sent email to: ${recipient_email}`);
   } catch (error) {}
 }
