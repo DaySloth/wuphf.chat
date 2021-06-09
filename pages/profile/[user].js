@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import styles from "../../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 import { useSession } from "next-auth/client";
 
 function Profile({ user }) {
