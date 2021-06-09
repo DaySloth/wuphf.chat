@@ -20,6 +20,7 @@
     "react-dom": "17.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "three-dots": "^0.2.0"
+    "three-dots": "^0.2.0",
+    "twilio": "^3.63.1"
   }
 }
