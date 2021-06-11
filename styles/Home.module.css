@@ -45,3 +45,10 @@
   margin: 0;
   background-color: black;
 }
+
+/* Main page styling */
+
+.sticky {
+  position: relative !important;
+  width: 100%;
+}
