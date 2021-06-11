@@ -12,8 +12,10 @@ import {
   Input,
   Icon,
   Rail,
+  Image,
   Sticky,
   Ref,
+  Header,
 } from "semantic-ui-react";
 
 import Navbar from "components/Navbar.js";
@@ -48,15 +50,17 @@ export default function Home() {
                 <Sticky context={contextRef}>
                   <Grid.Row>
                     <Segment>
-                      <h1>blah blah</h1>
-                      <h1>blah blah</h1>
+                      <Header as="h2">
+                        <Image
+                          circular
+                          src="https://library.kissclipart.com/20180905/arq/kissclipart-businessman-icon-png-clipart-computer-icons-user-p-f040ea1493575c42.jpg"
+                        />{" "}
+                        {session.user.first_name}
+                      </Header>
                     </Segment>
                   </Grid.Row>
                   <Grid.Row>
-                    <Segment>
-                      <h1>blah blah</h1>
-                      <h1>blah blah</h1>
-                    </Segment>
+                    <Segment></Segment>
                   </Grid.Row>
                 </Sticky>
               </Grid.Column>
