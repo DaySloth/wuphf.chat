@@ -26,6 +26,9 @@ export default function Signup() {
   });
   const [loading, setLoading] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const router = useRouter();
   const { error } = router.query;
 
@@ -164,10 +167,15 @@ export default function Signup() {
                         <Form.Field>
                           <label style={{ color: "white" }}>Password</label>
                           <Input
-                            icon={{
-                              name: "lock",
+                            action={{
+                              icon: "eye slash",
+                              onClick: (event) => {
+                                event.preventDefault();
+                                setShowPassword(!showPassword);
+                              },
                             }}
-                            type="password"
+                            actionPosition="right"
+                            type={showPassword ? "text" : "password"}
                             name="password"
                             onChange={({ target }) => {
                               setUser({ ...user, password: target.value });
