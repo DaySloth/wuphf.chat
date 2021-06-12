@@ -16,12 +16,15 @@ import {
   Sticky,
   Ref,
   Header,
+  Dimmer,
+  Loader,
 } from "semantic-ui-react";
 
 import Navbar from "components/Navbar.js";
 
 export default function Home() {
   const contextRef = createRef();
+  const [isMobile, setIsMobile] = useState(true);
   const router = useRouter();
   const [session, loading] = useSession();
 
@@ -31,14 +34,27 @@ export default function Home() {
         window.location.href = "/authorize/login";
       }
     }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1400) {
+        setIsMobile(false);
+      } else {
+        setIsMobile(true);
+      }
+    });
   }, [loading]);
 
   return (
     <>
+      {loading && (
+        <Dimmer active>
+          <Loader>Loading</Loader>
+        </Dimmer>
+      )}
+
       {session && (
         <>
           <Navbar />
-          <div className={styles.container}>
+          <div className={!isMobile ? styles.container : "false"}>
             <Head>
               <title>
                 Home | {`${session.user.first_name} ${session.user.last_name}`}
@@ -59,8 +75,10 @@ export default function Home() {
                       </Header>
                     </Segment>
                   </Grid.Row>
-                  <Grid.Row>
-                    <Segment></Segment>
+                  <Grid.Row className={styles.stickyChats}>
+                    <Segment>
+                      <Button onClick={signOut}>Logout</Button>
+                    </Segment>
                   </Grid.Row>
                 </Sticky>
               </Grid.Column>
