@@ -50,8 +50,12 @@
   display: inline-block !important;
 }
 
-.userDropdown {
+.iconInteract {
   cursor: pointer;
 }
 
 /* Main page styling */
+
+.stickyChats {
+  margin-top: 60%;
+}
