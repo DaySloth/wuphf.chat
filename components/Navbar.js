@@ -16,6 +16,8 @@ import {
   Image,
   List,
   Header,
+  Dropdown,
+  Checkbox,
 } from "semantic-ui-react";
 
 export default function Navbar() {
@@ -42,23 +44,26 @@ export default function Navbar() {
         <Grid.Column width={5}>
           <Header as="h2" className={styles.navbarUser}>
             <Image
-              circular
-              src="https://library.kissclipart.com/20180905/arq/kissclipart-businessman-icon-png-clipart-computer-icons-user-p-f040ea1493575c42.jpg"
+              avatar
+              src="https://icon-library.com/images/users-vector-icon-png_260862_41598.jpg"
             />{" "}
             {session.user.first_name}
           </Header>
-          <Icon
-            name={dropdownIcon}
-            size="large"
-            className={styles.iconInteract}
-            onClick={() => {
-              if (dropdownIcon === "caret down") {
-                setDropdownIcon("caret up");
-              } else {
-                setDropdownIcon("caret down");
-              }
-            }}
-          />
+
+          <Dropdown
+            icon={dropdownIcon}
+            as="h3"
+            onClose={() => setDropdownIcon("caret down")}
+            onOpen={() => setDropdownIcon("caret up")}
+            compact
+          >
+            <Dropdown.Menu>
+              <Dropdown.Header content="Settings" icon="cog" />
+              <Dropdown.Divider />
+
+              <Dropdown.Item text="Logout" onClick={signOut} />
+            </Dropdown.Menu>
+          </Dropdown>
         </Grid.Column>
       </Grid>
     </div>

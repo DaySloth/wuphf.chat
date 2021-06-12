@@ -66,19 +66,18 @@ export default function Home() {
                 <Sticky context={contextRef}>
                   <Grid.Row>
                     <Segment>
-                      <Header as="h2">
+                      <Header as="h1" textAlign="center">
                         <Image
                           circular
-                          src="https://library.kissclipart.com/20180905/arq/kissclipart-businessman-icon-png-clipart-computer-icons-user-p-f040ea1493575c42.jpg"
-                        />{" "}
+                          src="https://icon-library.com/images/users-vector-icon-png_260862_41598.jpg"
+                          size="massive"
+                        />
                         {session.user.first_name}
                       </Header>
                     </Segment>
                   </Grid.Row>
                   <Grid.Row className={styles.stickyChats}>
-                    <Segment>
-                      <Button onClick={signOut}>Logout</Button>
-                    </Segment>
+                    <Segment></Segment>
                   </Grid.Row>
                 </Sticky>
               </Grid.Column>
