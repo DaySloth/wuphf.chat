@@ -29,13 +29,13 @@ export default function Navbar() {
         <Grid.Column textAlign="center" width={6}>
           <List horizontal>
             <List.Item>
-              <Icon name="home" size="huge" />
+              <Icon name="home" size="huge" className={styles.iconInteract} />
             </List.Item>
             <List.Item>
-              <Icon name="home" size="huge" />
+              <Icon name="home" size="huge" className={styles.iconInteract} />
             </List.Item>
             <List.Item>
-              <Icon name="home" size="huge" />
+              <Icon name="home" size="huge" className={styles.iconInteract} />
             </List.Item>
           </List>
         </Grid.Column>
@@ -50,7 +50,7 @@ export default function Navbar() {
           <Icon
             name={dropdownIcon}
             size="large"
-            className={styles.userDropdown}
+            className={styles.iconInteract}
             onClick={() => {
               if (dropdownIcon === "caret down") {
                 setDropdownIcon("caret up");
